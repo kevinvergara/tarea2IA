@@ -121,4 +121,31 @@ public class ManejoArchivo {
         b.close();
         return filas; 
     }
+    
+    public int numFilas() throws FileNotFoundException, IOException{
+        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+
+
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        
+        int numFilas = Integer.parseInt(b.readLine());//fi
+        int numColumnas = Integer.parseInt(b.readLine());//col
+        
+        
+        return numFilas;
+    }
+    
+    public int numColumnas() throws FileNotFoundException, IOException{
+        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        
+        int numFilas = Integer.parseInt(b.readLine());//fi
+        int numColumnas = Integer.parseInt(b.readLine());//col
+        
+        
+        return numColumnas;
+    }
 }

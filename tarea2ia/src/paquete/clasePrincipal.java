@@ -2,14 +2,16 @@
 package paquete;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class clasePrincipal {
 
     public static void main(String[] args) throws IOException {
         //filas columnas
-        ManejoArchivo aux = new ManejoArchivo();
-        aux.cargarColumnas();
-        aux.cargarFilas();
+        ManejoArchivo archivo = new ManejoArchivo();
+        
+        Recorrido iterar = new Recorrido();
+        iterar.buscarSolucion(archivo.numFilas(), archivo.numColumnas(), (ArrayList)archivo.cargarColumnas(),(ArrayList)archivo.cargarFilas());
         
         
     }
