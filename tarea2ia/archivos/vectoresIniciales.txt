@@ -2,7 +2,7 @@
 5
 2
 -------columnas--------
-a 05 t-r 00 f-v 00 f
+a 05 t-r 00 f
 a 03 f-r 02 f
 a 00 f-r 05 t
 a 04 t-r 01 f
