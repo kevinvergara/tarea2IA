@@ -2,19 +2,21 @@ package paquete;
 
 import java.util.ArrayList;
 
-public class ArrayListColumna {
+public class ArrayListFila {
     private ArrayList colores = new ArrayList();
     private int numVacios;
-
+    
     //constructores
-    public ArrayListColumna() {
+    
+    public ArrayListFila(){
     }
 
-    public ArrayListColumna(int numVacios) {
+    public ArrayListFila(int numVacios) {
         this.numVacios = numVacios;
     }
-    //---------------
-    public void setColor(Color color){
+
+    //-------------
+    public void setColor(Color color) {
         colores.add(color);
     }
     
@@ -34,5 +36,4 @@ public class ArrayListColumna {
     public void setNumVacios(int numVacios) {
         this.numVacios = numVacios;
     }
- 
 }
