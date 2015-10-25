@@ -14,3 +14,10 @@ a 04 f-r 01 f
 a 04 f-r 01 f
 a 02 f-r 03 t
 ----------fin----------
+
+-----formato texto-----
+primer numero filas
+segundo numero columnas
+tercer numero numerode colores
+despues los vectores de las columnas
+y luego los vectores de las filas

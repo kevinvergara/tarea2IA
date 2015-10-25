@@ -9,6 +9,7 @@ public class clasePrincipal {
         //filas columnas
         ManejoArchivo aux = new ManejoArchivo();
         aux.cargarColumnas();
+        aux.cargarFilas();
         
         
     }
