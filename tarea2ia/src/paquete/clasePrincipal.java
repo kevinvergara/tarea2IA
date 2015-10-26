@@ -11,7 +11,7 @@ public class clasePrincipal {
         ManejoArchivo archivo = new ManejoArchivo();
         
         Recorrido iterar = new Recorrido();
-        iterar.buscarSolucion(archivo.numFilas(), archivo.numColumnas(), (ArrayList)archivo.cargarColumnas(),(ArrayList)archivo.cargarFilas());
+        iterar.buscarSolucion(archivo.numColores(),archivo.numFilas(), archivo.numColumnas(), (ArrayList)archivo.cargarColumnas(),(ArrayList)archivo.cargarFilas());
         
         
     }

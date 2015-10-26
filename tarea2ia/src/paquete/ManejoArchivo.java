@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ManejoArchivo {
 
     public ArrayList cargarColumnas() throws FileNotFoundException, IOException{
-        ArrayList columnas = new ArrayList();//almacenar los objetos ArrayListColumnas
+        ArrayList<ArrayListColumna> columnas = new ArrayList();//almacenar los objetos ArrayListColumnas
         
         
         String cadena;
@@ -50,13 +50,6 @@ public class ManejoArchivo {
                 
                 auxColumna.setColor(auxColor);
             }
-            //agrego 
-            Color espaciosVacios = new Color();
-            espaciosVacios.setColor("z");
-            espaciosVacios.setNumero(numFilas);
-            espaciosVacios.setSeguido(false);
-            auxColumna.setColor(espaciosVacios);
-            
             System.out.println();
             columnas.add((ArrayListColumna)auxColumna);
         }
@@ -65,7 +58,7 @@ public class ManejoArchivo {
     }
     
     public ArrayList cargarFilas() throws FileNotFoundException, IOException{
-        ArrayList filas = new ArrayList();//almacenar los objetos ArrayListColumnas
+        ArrayList<ArrayListFila> filas = new ArrayList();//almacenar los objetos ArrayListColumnas
         
         
         String cadena;
@@ -108,12 +101,6 @@ public class ManejoArchivo {
                 
                 auxFila.setColor(auxColor);
             }
-            //agrego 
-            Color espaciosVacios = new Color();
-            espaciosVacios.setColor("z");
-            espaciosVacios.setNumero(numColumnas);
-            espaciosVacios.setSeguido(false);
-            auxFila.setColor(espaciosVacios);
             
             System.out.println();
             filas.add((ArrayListFila)auxFila);
@@ -147,5 +134,20 @@ public class ManejoArchivo {
         
         
         return numColumnas;
+    }
+    
+    public int numColores() throws FileNotFoundException, IOException{
+        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        
+        b.readLine();//fi
+        b.readLine();//col
+        int colores = Integer.parseInt(b.readLine());//colores
+        
+        
+        return colores;
+    
     }
 }

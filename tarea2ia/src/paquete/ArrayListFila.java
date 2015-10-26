@@ -3,7 +3,7 @@ package paquete;
 import java.util.ArrayList;
 
 public class ArrayListFila {
-    private ArrayList colores = new ArrayList();
+    private ArrayList<Color> colores = new ArrayList();
     private int numVacios;
     
     //constructores
@@ -20,10 +20,18 @@ public class ArrayListFila {
         colores.add(color);
     }
     
-    public Color getColor(String color){
+    public Color getColorBorrar(int index){
+        return colores.get(index);
+    }
+
+    public Color getColor(int index){
+        return colores.get(index);
+    }
+    
+    public Color getEspaciosVacios(){
         for(int i=0;i<colores.size();i++){
-            if(((Color)colores.get(i)).getColor().equals(color)){
-                return ((Color)colores.remove(i));
+            if(colores.get(i).getColor().equals("z")){
+                return (Color)colores.get(i);
             }
         }
         return null;
