@@ -16,7 +16,7 @@ public class ManejoArchivo {
         String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
      
 
-        System.out.println("columnas");
+        //System.out.println("columnas");
 
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
@@ -29,7 +29,7 @@ public class ManejoArchivo {
         
         for(int i=0;i<numColumnas;i++){
             cadena = b.readLine();
-            System.out.println(cadena);
+            //System.out.println(cadena);
             ArrayListColumna auxColumna = new ArrayListColumna();
             for(int j=0;j<cadena.length();j=j+7){
                 Color auxColor = new Color();
@@ -46,11 +46,11 @@ public class ManejoArchivo {
                 }else if((cadena.charAt(j+5)+"").equals("f")){
                     auxColor.setSeguido(false);
                 }
-                System.out.print(auxColor.getColor()+"-"+auxColor.getNumero()+"-"+auxColor.isSeguido()+"\n");
+                //System.out.print(auxColor.getColor()+"-"+auxColor.getNumero()+"-"+auxColor.isSeguido()+"\n");
                 
                 auxColumna.setColor(auxColor);
             }
-            System.out.println();
+            //System.out.println();
             columnas.add((ArrayListColumna)auxColumna);
         }
         b.close();
@@ -64,7 +64,7 @@ public class ManejoArchivo {
         String cadena;
         String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
      
-        System.out.println("filas");
+        //System.out.println("filas");
 
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
@@ -80,7 +80,7 @@ public class ManejoArchivo {
         
         for(int i=0;i<numFilas;i++){
             cadena = b.readLine();
-            System.out.println(cadena);
+            //System.out.println(cadena);
             ArrayListFila auxFila = new ArrayListFila();
             for(int j=0;j<cadena.length();j=j+7){
                 Color auxColor = new Color();
@@ -97,12 +97,12 @@ public class ManejoArchivo {
                 }else if((cadena.charAt(j+5)+"").equals("f")){
                     auxColor.setSeguido(false);
                 }
-                System.out.print(auxColor.getColor()+"-"+auxColor.getNumero()+"-"+auxColor.isSeguido()+"\n");
+                //System.out.print(auxColor.getColor()+"-"+auxColor.getNumero()+"-"+auxColor.isSeguido()+"\n");
                 
                 auxFila.setColor(auxColor);
             }
             
-            System.out.println();
+            //System.out.println();
             filas.add((ArrayListFila)auxFila);
         }
         b.close();

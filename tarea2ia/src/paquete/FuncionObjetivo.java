@@ -5,7 +5,7 @@ public class FuncionObjetivo {
     public boolean solucion(){
     
     
-    return true;
+    return true;    
     }
            
 }
