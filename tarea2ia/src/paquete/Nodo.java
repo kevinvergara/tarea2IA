@@ -3,7 +3,7 @@ package paquete;
 
 import java.util.ArrayList;
 
-public class nodoPrincipal {
+public class Nodo {
     private ArrayList<ArrayListFila> filas;
     private ArrayList<ArrayListColumna> columnas;
     private String [][] matriz;
@@ -11,7 +11,7 @@ public class nodoPrincipal {
     private int nFilas;
     private int nColores;
 
-    public nodoPrincipal(ArrayList<ArrayListFila> filas, ArrayList<ArrayListColumna> columnas, String[][] matriz, int nColumnas, int nFilas, int nColores) {
+    public Nodo(ArrayList<ArrayListFila> filas, ArrayList<ArrayListColumna> columnas, String[][] matriz, int nColumnas, int nFilas, int nColores) {
         this.filas = filas;
         this.columnas = columnas;
         this.matriz = matriz;
@@ -20,7 +20,7 @@ public class nodoPrincipal {
         this.nColores = nColores;
     }
 
-    public nodoPrincipal() {
+    public Nodo() {
     }
 
     public ArrayList<ArrayListFila> getFilas() {
@@ -28,7 +28,6 @@ public class nodoPrincipal {
     }
 
     public void setFilas(ArrayList<ArrayListFila> filas) {
-        this.filas.clear();
         this.filas = (ArrayList<ArrayListFila>) filas.clone();
     }
 
@@ -37,7 +36,7 @@ public class nodoPrincipal {
     }
 
     public void setColumnas(ArrayList<ArrayListColumna> columnas) {
-        this.columnas.clear();
+        
         this.columnas = (ArrayList<ArrayListColumna>) columnas.clone();
     }
 
