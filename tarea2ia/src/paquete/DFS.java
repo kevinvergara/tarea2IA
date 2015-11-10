@@ -15,26 +15,35 @@ public class DFS {
         
         raiz = (Nodo)heuristica.colorIgualVacio(raiz);
         
-        System.out.println("solucion: ");
+        System.out.println("resultado heuristica 1: ");
         operadores.imprimirMatriz(raiz.getMatriz());
-        /*
         
         
         if(raiz!=null){
-                pila.push(null);
-                pila.push((Nodo)raiz);
+                pila.push(raiz);
             while(!pila.empty()){//mientras la pila no este vacia
                 nodoActual = (Nodo)pila.pop();
 
-
-
-
-
+                //aplicar primera heuristica de nuevo
+                
+                nodoActual = (Nodo)heuristica.colorIgualVacio(nodoActual);
+              
+                //-----
+                int [] posicion = null;
+                posicion = operadores.posicionVacia(nodoActual.getMatriz());
+             
+                //si posicion es null, quiere decir que encontro solucion
+                if(posicion == null){
+                    return nodoActual.getMatriz();
+                }
+                //----------
+                
+                
 
 
             }//fin while
         }//if raiz no existe
-                */
+        
         return null;    
     }
 }

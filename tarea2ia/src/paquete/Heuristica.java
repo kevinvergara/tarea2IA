@@ -9,6 +9,7 @@ public class Heuristica {
         Operadores operadores = new Operadores();
         //variables de matriz
         int numFilas,numColumnas,numColores;
+        
         numColumnas = nodo.getnColumnas();
         numFilas = nodo.getnFilas();
         numColores = nodo.getnColores();
@@ -38,18 +39,18 @@ public class Heuristica {
             for(int i = 0;i<numFilas;i++){
                 
                 //filas 
-                System.out.println("procesando filas");
+                //System.out.println("procesando filas");
                 ArrayListFila auxListFila = new ArrayListFila();
                 auxListFila = (ArrayListFila)filas.get(i);
                 
                 for(int j=0;j<numColores;j++){
                     Color auxColor = new Color();
                     auxColor = auxListFila.getColor(j);
-                    System.out.println("ncolor :"+auxColor.getNumero()+" nvacios: "+operadores.numVaciosFila(matriz, i));
+                    //System.out.println("ncolor :"+auxColor.getNumero()+" nvacios: "+operadores.numVaciosFila(matriz, i));
                     if(auxColor.getNumero()!=0 && operadores.numVaciosFila(matriz, i)!=0){
                         if(auxColor.getNumero() == operadores.numVaciosFila(matriz, i)){
                             cambio=1;
-                            System.out.println("fgasf: filas");
+                            //System.out.println("fgasf: filas");
                             matriz = operadores.pintarFilaCompleta(matriz,auxColor.getColor(),i).clone();
 
                             ((ArrayListFila)filas.get(i)).getColor(j).setNumero(0);
@@ -58,7 +59,9 @@ public class Heuristica {
                                     ((ArrayListColumna)columnas.get(x)).getColor(j).setNumero((((ArrayListColumna)columnas.get(x)).getColor(j).getNumero())-1);
                                 }
                             }
+                            System.out.println("-----------------");
                             operadores.imprimirMatriz(matriz);
+                            System.out.println("-----------------");
                         }
                     }
                 }
@@ -66,18 +69,18 @@ public class Heuristica {
             
             for(int i = 0;i<numColumnas;i++){
                 //columnas
-                System.out.println("procesando columnas");
+                //System.out.println("procesando columnas");
                 ArrayListColumna auxListColumna = new ArrayListColumna();
                 auxListColumna = (ArrayListColumna)columnas.get(i);
                 
                 for(int j=0;j<numColores;j++){
                     Color auxColor = new Color();
                     auxColor = auxListColumna.getColor(j);
-                    System.out.println("ncolor :"+auxColor.getNumero()+" nvacios: "+operadores.numVaciosColumnas(matriz, i));
+                    //System.out.println("ncolor :"+auxColor.getNumero()+" nvacios: "+operadores.numVaciosColumnas(matriz, i));
                     if(auxColor.getNumero()!=0 && operadores.numVaciosColumnas(matriz, i)!=0){    
                         if(auxColor.getNumero() == operadores.numVaciosColumnas(matriz, i)){
                             cambio = 1;
-                            System.out.println("skdf: columnas");
+                            //System.out.println("skdf: columnas");
                             matriz = operadores.pintarColumnaCompleta(matriz, auxColor.getColor(), i).clone();
                             
                             ((ArrayListColumna)columnas.get(i)).getColor(j).setNumero(0);
@@ -87,8 +90,9 @@ public class Heuristica {
                                     ((ArrayListFila)filas.get(x)).getColor(j).setNumero((((ArrayListFila)filas.get(x)).getColor(j).getNumero())-1);
                                 }
                             }
-                            
+                            System.out.println("-----------------");
                             operadores.imprimirMatriz(matriz);
+                            System.out.println("-----------------");
                         }
                     }
                 }
@@ -104,4 +108,10 @@ public class Heuristica {
         return nodo;
     }
    
+    public boolean caminoValido(){
+        
+    
+    
+    return true;
+    }
 }

@@ -68,16 +68,18 @@ public class Operadores {
         return vacios;
     }
     //espacios vacios en una matriz
-    public int numVaciosMatriz(String [][] matriz){
-        int contador=0;
+    public int [] posicionVacia(String [][] matriz){
+        int [] posicion = new int [2];
         
         for(int i=0;i<matriz.length;i++){
             for(int j=0;j<matriz[0].length;j++){
                 if(matriz[i][j].equals(" ")){
-                    contador++;
+                    posicion[0]=i;
+                    posicion[1]=j;
+                    return posicion;
                 }
             }
         }
-        return contador;
+        return null;
     }
 }

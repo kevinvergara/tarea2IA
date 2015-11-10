@@ -29,11 +29,18 @@ public class clasePrincipal {
         raiz.setnColores(archivo.numColores());
         raiz.setnColumnas(archivo.numColumnas());
         raiz.setnFilas(archivo.numFilas());
-        //_-----
+        raiz.setNivel(0);
+        //--------
+        Operadores operadores = new Operadores();
         
         DFS dfs = new DFS();
-        dfs.dfs(raiz);
-        
+        matriz = dfs.dfs(raiz);
+        if(matriz!=null){
+            System.out.println("solucion desde clase principal: ");
+            operadores.imprimirMatriz(matriz);
+        }else{
+            System.out.println("no hay solucion qla");
+        }
     }
     
 }

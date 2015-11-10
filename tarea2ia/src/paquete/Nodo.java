@@ -10,6 +10,7 @@ public class Nodo {
     private int nColumnas;
     private int nFilas;
     private int nColores;
+    private int nivel;
 
     public Nodo(ArrayList<ArrayListFila> filas, ArrayList<ArrayListColumna> columnas, String[][] matriz, int nColumnas, int nFilas, int nColores) {
         this.filas = filas;
@@ -71,6 +72,13 @@ public class Nodo {
     public void setnColores(int nColores) {
         this.nColores = nColores;
     }
-    
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
     
 }
