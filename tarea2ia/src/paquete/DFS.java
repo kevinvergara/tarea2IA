@@ -30,7 +30,7 @@ public class DFS {
               
                 //-----
                 int [] posicion = null;
-                posicion = operadores.posicionVacia(nodoActual.getMatriz());
+                posicion = operadores.posicionVacia(nodoActual);
              
                 //si posicion es null, quiere decir que encontro solucion
                 if(posicion == null){
@@ -38,8 +38,13 @@ public class DFS {
                 }
                 //----------
                 
+                String [] coloresComunes = null;
+                coloresComunes = operadores.coloresComunes(nodoActual, posicion);
                 
-
+                for(int i=0;i<coloresComunes.length;i++){
+                    
+                    
+                }
 
             }//fin while
         }//if raiz no existe

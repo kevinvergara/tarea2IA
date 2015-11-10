@@ -1,5 +1,7 @@
 package paquete;
 
+import java.util.ArrayList;
+
 public class Operadores {
     public String[][] pintarFilaCompleta(String [][] matriz,String color,int fila){
         
@@ -68,18 +70,50 @@ public class Operadores {
         return vacios;
     }
     //espacios vacios en una matriz
-    public int [] posicionVacia(String [][] matriz){
+    public int [] posicionVacia(Nodo nodo){
         int [] posicion = new int [2];
         
-        for(int i=0;i<matriz.length;i++){
-            for(int j=0;j<matriz[0].length;j++){
-                if(matriz[i][j].equals(" ")){
+        for(int i=0;i<nodo.getMatriz().length;i++){
+            for(int j=0;j<nodo.getMatriz().length;j++){
+                if(nodo.getMatriz()[i][j].equals(" ")){
                     posicion[0]=i;
                     posicion[1]=j;
-                    return posicion;
+                    if(coloresComunes(nodo,posicion)!=null){
+                        return posicion;
+                    }
                 }
             }
         }
         return null;
     }
+    //----------
+    //colores comunes en una posicion
+    public String [] coloresComunes(Nodo nodo,int [] posicion){
+        ArrayList<String> auxColores = new ArrayList<String>();
+        
+        ArrayListColumna columna = new ArrayListColumna();
+        columna = (ArrayListColumna)nodo.getColumnas().get(posicion[1]);
+        
+        ArrayListFila fila = new ArrayListFila();
+        fila = (ArrayListFila)nodo.getFilas().get(posicion[0]);
+        //----------
+        for(int i=0;i<nodo.getnColores();i++){
+            if(fila.getColor(i).getNumero()!=0){
+                if(columna.getColor(i).getNumero()!=0){
+                    auxColores.add(columna.getColor(i).getColor());
+                }
+            }
+        }
+        
+        if(auxColores.size() == 0) return null;
+        
+        String [] colores = new String [auxColores.size()];
+        
+        for(int i=0;i<auxColores.size();i++){
+            colores[i] = auxColores.get(i);
+        }
+        
+        return colores;
+    }
+    //_-------------
 }
