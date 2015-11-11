@@ -32,18 +32,23 @@ public class DFS {
                 int [] posicion = null;
                 posicion = operadores.posicionVacia(nodoActual);
              
-                //si posicion es null, quiere decir que encontro solucion
+                //si posicion es null, quiere decir que encontro matriz candidata a solucion, o que el camino
+                //es incorrecto
                 if(posicion == null){
-                    return nodoActual.getMatriz();
-                }
-                //----------
-                
-                String [] coloresComunes = null;
-                coloresComunes = operadores.coloresComunes(nodoActual, posicion);
-                
-                for(int i=0;i<coloresComunes.length;i++){
+                    FuncionObjetivo FO = new FuncionObjetivo();
+                    if(FO.solucion(nodoActual)==true){
+                        return nodoActual.getMatriz();
+                    }
+                }else{//crear nodos si el camino sera valido
                     
-                    
+                    int [] coloresComunes = null;
+                    coloresComunes = operadores.coloresComunes(nodoActual, posicion);
+
+                    for(int i=0;i<coloresComunes.length;i++){
+                        Nodo nuevoNodo = (Nodo)operadores.nuevoNodo(nodoActual, posicion, coloresComunes[i]);
+                        nodoActual.addHijo(nuevoNodo);
+                        pila.push((Nodo)nuevoNodo);
+                    }
                 }
 
             }//fin while

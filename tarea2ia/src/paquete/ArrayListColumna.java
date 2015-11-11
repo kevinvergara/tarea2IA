@@ -13,6 +13,10 @@ public class ArrayListColumna {
         colores.add(color);
     }
     
+    public void setColo(Color color, int index){
+        colores.add(index, color);
+    }
+    
     public Color getColorBorrar(int index){
         return colores.get(index);
     }

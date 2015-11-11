@@ -107,11 +107,4 @@ public class Heuristica {
         
         return nodo;
     }
-   
-    public boolean caminoValido(){
-        
-    
-    
-    return true;
-    }
 }

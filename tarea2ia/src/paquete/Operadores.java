@@ -74,7 +74,7 @@ public class Operadores {
         int [] posicion = new int [2];
         
         for(int i=0;i<nodo.getMatriz().length;i++){
-            for(int j=0;j<nodo.getMatriz().length;j++){
+            for(int j=0;j<nodo.getMatriz()[0].length;j++){
                 if(nodo.getMatriz()[i][j].equals(" ")){
                     posicion[0]=i;
                     posicion[1]=j;
@@ -88,8 +88,8 @@ public class Operadores {
     }
     //----------
     //colores comunes en una posicion
-    public String [] coloresComunes(Nodo nodo,int [] posicion){
-        ArrayList<String> auxColores = new ArrayList<String>();
+    public int [] coloresComunes(Nodo nodo,int [] posicion){
+        ArrayList auxColores = new ArrayList();
         
         ArrayListColumna columna = new ArrayListColumna();
         columna = (ArrayListColumna)nodo.getColumnas().get(posicion[1]);
@@ -100,20 +100,60 @@ public class Operadores {
         for(int i=0;i<nodo.getnColores();i++){
             if(fila.getColor(i).getNumero()!=0){
                 if(columna.getColor(i).getNumero()!=0){
-                    auxColores.add(columna.getColor(i).getColor());
+                    auxColores.add(i);
                 }
             }
         }
         
         if(auxColores.size() == 0) return null;
         
-        String [] colores = new String [auxColores.size()];
+        int [] colores = new int [auxColores.size()];
         
         for(int i=0;i<auxColores.size();i++){
-            colores[i] = auxColores.get(i);
+            colores[i] = (int)auxColores.get(i);
         }
         
         return colores;
     }
     //_-------------
+    //return true si la matriz esta llena, si es false es que la matriz tiene espacios
+    public boolean matrizLlena(String [][] matriz){
+        for(int i=0;i<matriz.length;i++){
+            for(int j=0;j<matriz[0].length;j++){
+                if(matriz[i][j].equals(" ")) return false;
+            }
+        }
+        return true;
+    }
+    //--------------
+    
+    //modificar la matriz y los colores asociados, y crea el nuevo nodo
+    public Nodo nuevoNodo (Nodo nodoActual, int [] posicion, int color){
+        
+        Nodo nodoNuevo = new Nodo();
+        nodoNuevo.setNivel(nodoActual.getNivel()+1);
+        nodoNuevo.setnColores(nodoActual.getnColores());
+        nodoNuevo.setnColumnas(nodoActual.getnColumnas());
+        nodoNuevo.setnFilas(nodoActual.getnFilas());
+        
+        //---nuevos arraylist
+        ArrayList<ArrayListColumna> arrayColumnas = new ArrayList<ArrayListColumna>();
+        arrayColumnas = (ArrayList<ArrayListColumna>)nodoActual.getColumnas();
+        
+        ArrayList<ArrayListFila> arrayFilas = new ArrayList<ArrayListFila>();
+        arrayFilas = (ArrayList<ArrayListFila>)nodoActual.getFilas();
+        //---
+        
+        //...
+        ArrayListColumna columna = new ArrayListColumna();
+        columna = (ArrayListColumna)arrayColumnas.get(posicion[1]);
+        
+        ArrayListFila fila = new ArrayListFila();
+        fila = (ArrayListFila)arrayFilas.get(posicion[0]);
+        //...
+        Color colorCol = new Color();
+        colorCol = columna.getColor(color);
+        
+        return nodoNuevo;
+    }
 }

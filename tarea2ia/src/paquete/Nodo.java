@@ -4,22 +4,14 @@ package paquete;
 import java.util.ArrayList;
 
 public class Nodo {
-    private ArrayList<ArrayListFila> filas;
-    private ArrayList<ArrayListColumna> columnas;
+    private ArrayList<ArrayListFila> filas = new ArrayList<ArrayListFila>();
+    private ArrayList<ArrayListColumna> columnas = new ArrayList<ArrayListColumna>();
+    private ArrayList<Nodo> hijos = new ArrayList<Nodo>();
     private String [][] matriz;
     private int nColumnas;
     private int nFilas;
     private int nColores;
     private int nivel;
-
-    public Nodo(ArrayList<ArrayListFila> filas, ArrayList<ArrayListColumna> columnas, String[][] matriz, int nColumnas, int nFilas, int nColores) {
-        this.filas = filas;
-        this.columnas = columnas;
-        this.matriz = matriz;
-        this.nColumnas = nColumnas;
-        this.nFilas = nFilas;
-        this.nColores = nColores;
-    }
 
     public Nodo() {
     }
@@ -81,4 +73,15 @@ public class Nodo {
         this.nivel = nivel;
     }
     
+    public void addHijo(Nodo nodo){
+        this.hijos.add(nodo);
+    }
+    
+    public Nodo getHijo(int index){
+        return this.hijos.get(index);
+    }
+    
+    public int cantidadHijos(){
+        return this.hijos.size();
+    }
 }
