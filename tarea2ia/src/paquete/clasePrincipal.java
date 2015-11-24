@@ -32,8 +32,8 @@ public class clasePrincipal {
         //--------
         Operadores operadores = new Operadores();
         
-        DFS dfs = new DFS();
-        matriz = dfs.dfs(raiz);
+        Recorrido recorrido = new Recorrido();
+        matriz = recorrido.recorrido(raiz);
         if(matriz!=null){
             System.out.println("solucion desde clase principal: ");
             operadores.imprimirMatriz(matriz);

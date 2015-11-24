@@ -13,6 +13,18 @@ public class Nodo {
     private int nColores;
     private int nivel;
 
+    public Nodo(ArrayList<Nodo> hijos,ArrayList<ArrayListColumna> columnas,ArrayList<ArrayListFila> filas,String[][] matriz, int nColumnas, int nFilas, int nColores, int nivel) {
+        this.matriz = matriz;
+        this.nColumnas = nColumnas;
+        this.nFilas = nFilas;
+        this.nColores = nColores;
+        this.nivel = nivel;
+        this.filas = filas;
+        this.columnas = columnas;
+        this.hijos = hijos;
+    }
+    
+    
     public Nodo() {
     }
 
@@ -83,5 +95,9 @@ public class Nodo {
     
     public int cantidadHijos(){
         return this.hijos.size();
+    }
+    
+    public ArrayList<Nodo> getHijos(){
+        return this.hijos;
     }
 }

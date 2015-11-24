@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Heuristica {
     
     public Nodo colorIgualVacio(Nodo nodo){
-        
+        System.out.println("-------------inicio heursitica-----------------");
         Operadores operadores = new Operadores();
         //variables de matriz
         int numFilas,numColumnas,numColores;
@@ -59,9 +59,9 @@ public class Heuristica {
                                     ((ArrayListColumna)columnas.get(x)).getColor(j).setNumero((((ArrayListColumna)columnas.get(x)).getColor(j).getNumero())-1);
                                 }
                             }
-                            System.out.println("-----------------");
+                            System.out.println("---");
                             operadores.imprimirMatriz(matriz);
-                            System.out.println("-----------------");
+                            System.out.println("---");
                         }
                     }
                 }
@@ -90,9 +90,9 @@ public class Heuristica {
                                     ((ArrayListFila)filas.get(x)).getColor(j).setNumero((((ArrayListFila)filas.get(x)).getColor(j).getNumero())-1);
                                 }
                             }
-                            System.out.println("-----------------");
+                            System.out.println("---");
                             operadores.imprimirMatriz(matriz);
-                            System.out.println("-----------------");
+                            System.out.println("---");
                         }
                     }
                 }
@@ -104,7 +104,7 @@ public class Heuristica {
         nodo.setColumnas(columnas);
         nodo.setFilas(filas);
         nodo.setMatriz(operadores.clonarMatriz(matriz));
-        
+        System.out.println("-------------final heursitica-----------------");
         return nodo;
     }
 }

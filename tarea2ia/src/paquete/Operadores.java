@@ -88,8 +88,8 @@ public class Operadores {
     }
     //----------
     //colores comunes en una posicion
-    public int [] coloresComunes(Nodo nodo,int [] posicion){
-        ArrayList auxColores = new ArrayList();
+    public String [] coloresComunes(Nodo nodo,int [] posicion){
+        ArrayList<String> auxColores = new ArrayList();
         
         ArrayListColumna columna = new ArrayListColumna();
         columna = (ArrayListColumna)nodo.getColumnas().get(posicion[1]);
@@ -100,17 +100,19 @@ public class Operadores {
         for(int i=0;i<nodo.getnColores();i++){
             if(fila.getColor(i).getNumero()!=0){
                 if(columna.getColor(i).getNumero()!=0){
-                    auxColores.add(i);
+                    auxColores.add(columna.getColor(i).getColor());
                 }
             }
         }
         
+        
+        
+        
         if(auxColores.size() == 0) return null;
         
-        int [] colores = new int [auxColores.size()];
-        
+        String [] colores = new String [auxColores.size()];
         for(int i=0;i<auxColores.size();i++){
-            colores[i] = (int)auxColores.get(i);
+            colores[i] = (String)auxColores.get(i);
         }
         
         return colores;
@@ -128,32 +130,109 @@ public class Operadores {
     //--------------
     
     //modificar la matriz y los colores asociados, y crea el nuevo nodo
-    public Nodo nuevoNodo (Nodo nodoActual, int [] posicion, int color){
+    public Nodo nuevoNodo (Nodo nodoActual, int [] posicion, String color){
+        String nomColor;
+        String [][] matriz = new String [nodoActual.getnFilas()][nodoActual.getnColumnas()];
+        matriz = clonarMatriz(nodoActual.getMatriz());
+        
+        Nodo nodo = new Nodo();
+        nodo = ((Nodo)nodoActual);
         
         Nodo nodoNuevo = new Nodo();
-        nodoNuevo.setNivel(nodoActual.getNivel()+1);
-        nodoNuevo.setnColores(nodoActual.getnColores());
-        nodoNuevo.setnColumnas(nodoActual.getnColumnas());
-        nodoNuevo.setnFilas(nodoActual.getnFilas());
+        nodoNuevo.setNivel(nodo.getNivel()+1);
+        nodoNuevo.setnColores(nodo.getnColores());
+        nodoNuevo.setnColumnas(nodo.getnColumnas());
+        nodoNuevo.setnFilas(nodo.getnFilas());
         
         //---nuevos arraylist
         ArrayList<ArrayListColumna> arrayColumnas = new ArrayList<ArrayListColumna>();
-        arrayColumnas = (ArrayList<ArrayListColumna>)nodoActual.getColumnas();
-        
+        //arrayColumnas = ((ArrayList<ArrayListColumna>)nodoActual.getColumnas());
+        for(int i=0;i<nodo.getColumnas().size();i++){
+            arrayColumnas.add(nodo.getColumnas().get(i));
+        }
         ArrayList<ArrayListFila> arrayFilas = new ArrayList<ArrayListFila>();
-        arrayFilas = (ArrayList<ArrayListFila>)nodoActual.getFilas();
-        //---
+        //arrayFilas = ((ArrayList<ArrayListFila>)nodoActual.getFilas());
         
+        for(int i=0;i<nodo.getFilas().size();i++){
+            arrayFilas.add(nodo.getFilas().get(i));
+        }
+        //---
+
         //...
         ArrayListColumna columna = new ArrayListColumna();
         columna = (ArrayListColumna)arrayColumnas.get(posicion[1]);
         
         ArrayListFila fila = new ArrayListFila();
         fila = (ArrayListFila)arrayFilas.get(posicion[0]);
+
         //...
         Color colorCol = new Color();
         colorCol = columna.getColor(color);
         
+        colorCol.setNumero(colorCol.getNumero()-1);
+        //...
+        Color colorFil = new Color();
+        colorFil = fila.getColor(color);
+        
+        colorFil.setNumero(colorFil.getNumero()-1);
+        //...
+        columna.replaceColor(colorCol);
+                                        
+        fila.replaceColor(colorFil);
+        
+        //...
+        arrayColumnas.set(posicion[1], columna);
+        arrayFilas.set(posicion[0], fila);
+        //...
+        nodoNuevo.setColumnas(arrayColumnas);
+        nodoNuevo.setFilas(arrayFilas);
+        //:..
+        nomColor = colorFil.getColor();
+        
+        matriz[posicion[0]][posicion[1]] = nomColor;
+        
+        nodoNuevo.setMatriz(clonarMatriz(matriz));
+        
         return nodoNuevo;
+    }
+    ///
+    public boolean imprimirNodo(Nodo nodo){
+        if(nodo==null) return false;
+        System.out.println("----------Nodo-----------");
+        this.imprimirMatriz(nodo.getMatriz());
+        
+        ArrayList<ArrayListColumna> arrayColumnas = new ArrayList<ArrayListColumna>();
+        arrayColumnas = (ArrayList<ArrayListColumna>)nodo.getColumnas();
+        
+        ArrayList<ArrayListFila> arrayFilas = new ArrayList<ArrayListFila>();
+        arrayFilas = (ArrayList<ArrayListFila>)nodo.getFilas();
+        
+                
+        System.out.println("--filas--");
+        
+        for(int i=0;i<arrayFilas.size();i++){
+            System.out.print("fil: "+i);
+           for(int j=0;j<nodo.getnColores();j++){
+               Color auxColor = new Color();
+               auxColor = (Color)arrayFilas.get(i).getColor(j);
+               System.out.print("|"+auxColor.getColor()+"-"+auxColor.getNumero()+"-"+auxColor.isSeguido()+"|");
+           }
+           System.out.println();
+        }
+        
+        
+        System.out.println("--columnas--");
+        
+        for(int i=0;i<arrayColumnas.size();i++){
+            System.out.print("col: "+i);
+           for(int j=0;j<nodo.getnColores();j++){
+               Color auxColor = new Color();
+               auxColor = (Color)arrayColumnas.get(i).getColor(j);
+               System.out.print("|"+auxColor.getColor()+"-"+auxColor.getNumero()+"-"+auxColor.isSeguido()+"|");
+           }
+           System.out.println();
+        }
+
+        return true;
     }
 }

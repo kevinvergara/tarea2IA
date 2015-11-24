@@ -9,10 +9,6 @@ public class FuncionObjetivo {
         Operadores operadores = new Operadores();
         if(operadores.matrizLlena(nodo.getMatriz())==false) return false;
         //----
-        
-        
-        
-    
         return true;
     }
 }
