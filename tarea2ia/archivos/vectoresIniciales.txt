@@ -1,18 +1,18 @@
 5
 5
-4
+2
 -------columnas--------
-v 00 f-c 00 f-a 05 t-o 00 f
-v 01 f-c 00 f-a 02 f-o 02 t
-v 02 f-c 01 f-a 00 f-o 02 f
-v 01 f-c 00 f-a 02 f-o 02 t
-v 00 f-c 00 f-a 05 t-o 00 f
+r 02 t-a 03 f
+r 04 t-a 01 f
+r 04 t-a 01 f
+r 04 t-a 01 f
+r 02 t-a 03 f
 ---------fila----------
-v 01 f-c 00 f-a 04 f-o 00 f
-v 02 f-c 00 f-a 02 f-o 01 f
-v 01 f-c 00 f-a 02 f-o 02 f
-v 00 f-c 00 f-a 02 f-o 03 t
-v 00 f-c 01 f-a 04 f-o 00 f
+r 02 f-a 03 f
+r 05 t-a 00 f
+r 05 t-a 00 f
+r 03 t-a 02 f
+r 01 f-a 04 f
 ----------fin----------
 
 -----formato texto-----
