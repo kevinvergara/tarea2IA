@@ -64,7 +64,7 @@ public class Operadores {
     //retornar numeros vacios de fila
     public int numVaciosFila(String [][] matriz,int fila){
         int vacios=0; 
-        
+        System.out.println("filas vvacias: "+matriz.length);
         for(int i=0;i<matriz.length;i++){
             if(matriz[fila][i].equals(" ")) vacios++;
         }
@@ -75,6 +75,7 @@ public class Operadores {
     public int numVaciosColumnas (String [][] matriz,int col){
         int vacios=0;
         
+        System.out.println("filas vvacias: "+matriz[0].length);
         for(int i=0;i<matriz[0].length;i++){
             if(matriz[i][col].equals(" ")) vacios++;
         }

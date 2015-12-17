@@ -51,6 +51,7 @@ public class Heuristica {
                     if(auxColor.getNumero()!=0 && operadores.numVaciosFila(matriz, i)!=0){
                         if(auxColor.getNumero() == operadores.numVaciosFila(matriz, i)){
                             cambio=1;
+                            nodo.setCambio(1);
                             //System.out.println("fgasf: filas");
                             matriz = operadores.pintarFilaCompleta(matriz,auxColor.getColor(),i).clone();
 
@@ -81,6 +82,7 @@ public class Heuristica {
                     if(auxColor.getNumero()!=0 && operadores.numVaciosColumnas(matriz, i)!=0){    
                         if(auxColor.getNumero() == operadores.numVaciosColumnas(matriz, i)){
                             cambio = 1;
+                            nodo.setCambio(1);
                             //System.out.println("skdf: columnas");
                             matriz = operadores.pintarColumnaCompleta(matriz, auxColor.getColor(), i).clone();
                             
@@ -169,6 +171,7 @@ public class Heuristica {
 
                                     if(auxColor2.isSeguido() == true){
                                         cambio=1;
+                                        nodo.setCambio(1);
                                         //pinta los extremos de la fila
                                         matriz = operadores.pintarPosicion(matriz,(numFilas-1), i, auxColor1.getColor());
                                         matriz = operadores.pintarPosicion(matriz, 0, i, auxColor1.getColor());
@@ -254,6 +257,7 @@ public class Heuristica {
                                     auxColor2 = auxListColumna.getColor(j2);
                                     if(auxColor2.isSeguido() == true){
                                         cambio=1;
+                                        nodo.setCambio(1);
                                         matriz = operadores.pintarPosicion(matriz,(numColumnas-1), i, auxColor1.getColor());
                                         matriz = operadores.pintarPosicion(matriz, 0, i, auxColor1.getColor());
                                         

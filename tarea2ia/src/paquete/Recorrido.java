@@ -15,13 +15,27 @@ public class Recorrido {
         Nodo nodoActual = new Nodo();
         nodoActual = (Nodo)raiz;
               
+        int cambio=1;
         
-        nodoActual = (Nodo)heuristica.dosNoSeguidos(nodoActual);
-        operadores.imprimirNodo(nodoActual);
+        while(cambio!=0){
+            cambio=0;
+            
+            nodoActual.setCambio(0);
+            nodoActual = (Nodo)heuristica.dosNoSeguidos(nodoActual);
+            operadores.imprimirNodo(nodoActual);
+            
+            if(nodoActual.getCambio()==1){
+                cambio=1;
+            }
+            
+            nodoActual.setCambio(0);
+            nodoActual = (Nodo)heuristica.colorIgualVacio(raiz);
+            operadores.imprimirNodo(nodoActual);
         
-        nodoActual = (Nodo)heuristica.colorIgualVacio(raiz);
-        operadores.imprimirNodo(nodoActual);
-        
+            if(nodoActual.getCambio()==1){
+                cambio=1;
+            }
+        }
         return nodoActual.getMatriz();    
     }
 }

@@ -35,7 +35,8 @@ public class ManejoArchivo {
                 Color auxColor = new Color();
                 auxColor.setColor(""+cadena.charAt(j));
                 if(!(cadena.charAt(j+2)+"").equals("0")){
-                    String auxChar = cadena.charAt(j+2)+cadena.charAt(j+3)+"";
+                    String la = cadena.charAt(j+3)+"";
+                    String auxChar = cadena.charAt(j+2)+la;
                     auxColor.setNumero(Integer.parseInt(auxChar));
                 }else{
                     auxColor.setNumero(Integer.parseInt((cadena.charAt(j+3)+"")));
@@ -86,7 +87,8 @@ public class ManejoArchivo {
                 Color auxColor = new Color();
                 auxColor.setColor(""+cadena.charAt(j));
                 if(!(cadena.charAt(j+2)+"").equals("0")){
-                    String auxChar = cadena.charAt(j+2)+cadena.charAt(j+3)+"";
+                    String la = cadena.charAt(j+3)+"";
+                    String auxChar = cadena.charAt(j+2)+la;
                     auxColor.setNumero(Integer.parseInt(auxChar));
                 }else{
                     auxColor.setNumero(Integer.parseInt((cadena.charAt(j+3)+"")));
