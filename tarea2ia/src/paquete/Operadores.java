@@ -15,13 +15,24 @@ public class Operadores {
     
     public String[][] pintarColumnaCompleta(String [][] matriz,String color,int columna){
         for(int i=0;i<matriz[0].length;i++){
-                if(matriz[i][columna].equals(" ")){
-                    matriz[i][columna]=color;
-                }
+            if(matriz[i][columna].equals(" ")){
+                matriz[i][columna]=color;
             }
+        }
         return (clonarMatriz(matriz));
     }
     
+    public String [][] pintarPosicion(String [][] matriz, int fila, int columna, String color){
+        for(int i=0;i<matriz.length;i++){
+            for(int j=0;j<matriz[0].length;j++){
+                if(i==fila && j==columna){
+                    matriz[i][j] = color;
+                }
+            }
+        }
+        
+        return clonarMatriz(matriz.clone());
+    }
     //-------------acciones secundarias-------------------------------------
     public String [][] clonarMatriz(String [][] matriz){
         if(matriz==null) return null;
@@ -117,6 +128,34 @@ public class Operadores {
            System.out.println();
         }
 
+        return true;
+    }
+    
+    public boolean isFilaVacia(String [][] matriz, int fila){
+        for(int i=0;i<matriz.length;i++){
+            if(i==fila){    
+                for(int j=0;j<matriz[0].length;j++){
+                    if(matriz[i][j].equals(" ")) {
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    public boolean isColumnaVacia(String [][] matriz, int columna){
+        for(int i=0;i<matriz.length;i++){
+            for(int j=0;j<matriz[0].length;j++){
+                if(j==columna){    
+                    if(matriz[i][j].equals(" ")) {
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
         return true;
     }
 }

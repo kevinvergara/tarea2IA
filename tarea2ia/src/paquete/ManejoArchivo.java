@@ -13,7 +13,7 @@ public class ManejoArchivo {
         
         
         String cadena;
-        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+        String archivo = "C:\\Users\\kevin\\Documents\\NetBeansProjects\\tarea2IA\\tarea2ia\\archivos\\vectoresIniciales.txt";
      
 
         //System.out.println("columnas");
@@ -62,7 +62,7 @@ public class ManejoArchivo {
         
         
         String cadena;
-        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+        String archivo = "C:\\Users\\kevin\\Documents\\NetBeansProjects\\tarea2IA\\tarea2ia\\archivos\\vectoresIniciales.txt";
      
         //System.out.println("filas");
 
@@ -110,7 +110,7 @@ public class ManejoArchivo {
     }
     
     public int numFilas() throws FileNotFoundException, IOException{
-        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+        String archivo = "C:\\Users\\kevin\\Documents\\NetBeansProjects\\tarea2IA\\tarea2ia\\archivos\\vectoresIniciales.txt";
 
 
         FileReader f = new FileReader(archivo);
@@ -124,7 +124,7 @@ public class ManejoArchivo {
     }
     
     public int numColumnas() throws FileNotFoundException, IOException{
-        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+        String archivo = "C:\\Users\\kevin\\Documents\\NetBeansProjects\\tarea2IA\\tarea2ia\\archivos\\vectoresIniciales.txt";
 
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
@@ -137,7 +137,7 @@ public class ManejoArchivo {
     }
     
     public int numColores() throws FileNotFoundException, IOException{
-        String archivo = "/home/kvergara/NetBeansProjects/tarea2IA/tarea2ia/archivos/vectoresIniciales.txt";
+        String archivo = "C:\\Users\\kevin\\Documents\\NetBeansProjects\\tarea2IA\\tarea2ia\\archivos\\vectoresIniciales.txt";
 
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
