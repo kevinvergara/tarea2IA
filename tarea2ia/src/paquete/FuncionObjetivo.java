@@ -3,11 +3,11 @@ package paquete;
 
 
 public class FuncionObjetivo {
-    public boolean solucion (Nodo nodo){
+    public boolean solucion (String [][] matriz){
         
         //verifica qe la matriz tenga espacios vacios
         Operadores operadores = new Operadores();
-        if(operadores.matrizLlena(nodo.getMatriz())==false) return false;
+        if(operadores.matrizLlena(matriz)==false) return false;
         //----
         return true;
     }

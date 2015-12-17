@@ -9,7 +9,7 @@ public class clasePrincipal {
         
         //filas columnas
         ManejoArchivo archivo = new ManejoArchivo();
-        
+        FuncionObjetivo fo = new FuncionObjetivo();
         //matriz
         String [][] matriz = new String[archivo.numFilas()][archivo.numColumnas()];
         
@@ -33,12 +33,19 @@ public class clasePrincipal {
         Operadores operadores = new Operadores();
         
         Recorrido recorrido = new Recorrido();
-        matriz = recorrido.recorrido(raiz);
-        if(matriz!=null){
-            System.out.println("solucion desde clase principal: ");
-            operadores.imprimirMatriz(matriz);
+        raiz = recorrido.recorrido(raiz);
+        
+        if(fo.solucion(raiz.getMatriz())){
+           System.out.println("--solucion--");
+           operadores.imprimirMatriz(raiz.getMatriz());
+           System.out.println("--solucion--");
         }else{
-            System.out.println("no hay solucion qla");
+        
+        
+        BackTracking back = new BackTracking();
+        
+        
+        operadores.imprimirMatriz(back.back(raiz));
         }
     }
     

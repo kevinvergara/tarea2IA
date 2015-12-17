@@ -25,7 +25,7 @@ public class ManejoArchivo {
         int numColumnas = Integer.parseInt(b.readLine());//col
         int numColores = Integer.parseInt(b.readLine());//colores
         b.readLine();//relleno
-        
+        b.readLine();//relleno
         
         for(int i=0;i<numColumnas;i++){
             cadena = b.readLine();
@@ -74,7 +74,7 @@ public class ManejoArchivo {
         int numColumnas = Integer.parseInt(b.readLine());//col
         int numColores = Integer.parseInt(b.readLine());//colores
         b.readLine();//relleno
-        
+        b.readLine();//relleno
         while(!(b.readLine().equals("---------fila----------"))){
             //para llegar a las filas
         }
@@ -147,6 +147,24 @@ public class ManejoArchivo {
         b.readLine();//fi
         b.readLine();//col
         int colores = Integer.parseInt(b.readLine());//colores
+        
+        
+        return colores;
+    
+    }
+    public String colores() throws FileNotFoundException, IOException{
+        String archivo = "C:\\Users\\kevin\\Documents\\NetBeansProjects\\tarea2IA\\tarea2ia\\archivos\\vectoresIniciales.txt";
+        String colores ;
+                
+                
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        
+        b.readLine();//fi
+        b.readLine();//col
+        b.readLine();//col
+        
+        colores = b.readLine();//col
         
         
         return colores;

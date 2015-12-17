@@ -14,7 +14,7 @@ public class Operadores {
     }
     
     public String[][] pintarColumnaCompleta(String [][] matriz,String color,int columna){
-        for(int i=0;i<matriz[0].length;i++){
+        for(int i=0;i<matriz.length;i++){
             if(matriz[i][columna].equals(" ")){
                 matriz[i][columna]=color;
             }
@@ -36,12 +36,13 @@ public class Operadores {
     //-------------acciones secundarias-------------------------------------
     public String [][] clonarMatriz(String [][] matriz){
         if(matriz==null) return null;
-        
+        String aux;
         String [][] matrizNueva = new String [matriz.length][matriz[0].length];
         
         for(int i=0;i<matriz.length;i++){
             for(int j=0;j<matriz[0].length;j++){
-                matrizNueva[i][j]=matriz[i][j];
+                aux = matriz[i][j];
+                matrizNueva[i][j]=aux+"";
             }
         }
         
@@ -64,23 +65,25 @@ public class Operadores {
     //retornar numeros vacios de fila
     public int numVaciosFila(String [][] matriz,int fila){
         int vacios=0; 
-        System.out.println("filas vvacias: "+matriz.length);
-        for(int i=0;i<matriz.length;i++){
+        for(int i=0;i<matriz[0].length;i++){
             if(matriz[fila][i].equals(" ")) vacios++;
         }
-        
+        //System.out.println("sfila: "+vacios);
         return vacios;
     }
     
     public int numVaciosColumnas (String [][] matriz,int col){
         int vacios=0;
         
-        System.out.println("filas vvacias: "+matriz[0].length);
-        for(int i=0;i<matriz[0].length;i++){
+        for(int i=0;i<matriz.length;i++){
             if(matriz[i][col].equals(" ")) vacios++;
         }
+        
+        //System.out.println("scolu: "+vacios);
         return vacios;
     }
+    
+
     //return true si la matriz esta llena, si es false es que la matriz tiene espacios
     public boolean matrizLlena(String [][] matriz){
         for(int i=0;i<matriz.length;i++){
@@ -159,4 +162,72 @@ public class Operadores {
         }
         return true;
     }
+    
+    public boolean isPosicionVaciaFila(String [][] matriz, int fila, int columna){
+        for(int i=0;i<matriz.length;i++){
+            for(int j=0;j<matriz[0].length;j++){
+                if(j==columna && i==fila){    
+                    if(matriz[i][j].equals(" ")) {
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    public boolean isPosicionVaciaColumna(String [][] matriz, int fila, int columna){
+        for(int i=0;i<matriz.length;i++){
+            for(int j=0;j<matriz[0].length;j++){
+                if(j==columna && i==fila){    
+                    if(matriz[i][j].equals(" ")) {
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    public int [] actualizarPosicion(String [][] matriz,int numC,int numF){// se usa
+        int [] vector = new int [2];
+        vector[0]=-1;
+        vector[1]=-1;
+        
+        for(int i=0;i<numF;i++){
+            for(int j=0;j<numC;j++){
+                if(!matriz[i][j].equals(" ")){
+                }else{
+                    vector[0]=i;
+                    vector[1]=j;
+                }
+            }
+        }
+        
+        if(vector[0]==-1 & vector[1]==-1){
+            return null;
+        }
+        return vector;
+    }
+    
+    public String [][] matrizModificada(String [][] matri,int [] vector,String color){// se usa
+        String [][] matriAux = new String [matri.length][matri[0].length];
+        
+        for(int i=0;i<matri.length;i++){
+            for(int j=0;j<matri[0].length;j++){
+                
+                if(vector[0]==i && vector[1]==j){
+                    matriAux[i][j]=color;
+                }else{
+                    matriAux[i][j]=matri[i][j];
+                }
+            }
+        }
+        
+        return matriAux;
+    }
+    
+
 }

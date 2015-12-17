@@ -1,6 +1,7 @@
 10
 5
 4
+rbvo
 -------columnas--------
 r 00 f-b 00 f-v 10 t-o 00 f
 r 03 t-b 00 f-v 07 f-o 00 f

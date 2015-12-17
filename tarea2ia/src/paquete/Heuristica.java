@@ -35,6 +35,7 @@ public class Heuristica {
         while(cambio!=0){
             cambio=0;
             
+            nodo.setCambio(0);
             //primero filas
             
             for(int i = 0;i<numFilas;i++){
@@ -143,6 +144,7 @@ public class Heuristica {
         while(cambio!=0){
             cambio=0;
             
+            nodo.setCambio(0);
             for(int i = 0;i<numFilas;i++){
                 if(operadores.isFilaVacia(nodo.getMatriz(), i) == true){
                     //filas
@@ -173,8 +175,10 @@ public class Heuristica {
                                         cambio=1;
                                         nodo.setCambio(1);
                                         //pinta los extremos de la fila
-                                        matriz = operadores.pintarPosicion(matriz,(numFilas-1), i, auxColor1.getColor());
-                                        matriz = operadores.pintarPosicion(matriz, 0, i, auxColor1.getColor());
+                                        matriz = operadores.pintarPosicion(matriz,i, (numColumnas-1), auxColor1.getColor());
+                                        
+                                        matriz = operadores.pintarPosicion(matriz, i, 0, auxColor1.getColor());
+                                        
                                         //pinta el resto de la fila
                                         matriz = operadores.pintarFilaCompleta(matriz, auxColor2.getColor(), i);
                                         //descuenta los colores en las filas
@@ -258,7 +262,7 @@ public class Heuristica {
                                     if(auxColor2.isSeguido() == true){
                                         cambio=1;
                                         nodo.setCambio(1);
-                                        matriz = operadores.pintarPosicion(matriz,(numColumnas-1), i, auxColor1.getColor());
+                                        matriz = operadores.pintarPosicion(matriz,(numFilas-1), i, auxColor1.getColor());
                                         matriz = operadores.pintarPosicion(matriz, 0, i, auxColor1.getColor());
                                         
                                         matriz = operadores.pintarColumnaCompleta(matriz, auxColor2.getColor(), i);
@@ -321,4 +325,99 @@ public class Heuristica {
         System.out.println("---------------final heuristica dosnoseguidos---------------");
         return nodo;
     }
+    //fin heuristica
+    
+    
+    //inicio de: qe un color con cierto numero, tenga los espacios justo pa pintar, idnependiente los demas colores
+    public Nodo espaciosJustos(Nodo nodo){
+        System.out.println("----------------inicio heuristica espaciosJustos--------------");
+        Operadores operadores = new Operadores();
+        //variables de matriz
+        int numFilas,numColumnas,numColores;
+        
+        numColumnas = nodo.getnColumnas();
+        numFilas = nodo.getnFilas();
+        numColores = nodo.getnColores();
+        
+        String [][] matriz = new String [numFilas][numColumnas];
+        matriz = operadores.clonarMatriz(nodo.getMatriz());
+        //-------------------
+        
+        //variables de filas y columnas
+        ArrayList<ArrayListColumna> columnas = new ArrayList<ArrayListColumna>();
+        columnas = (ArrayList<ArrayListColumna>)nodo.getColumnas();
+        
+        ArrayList<ArrayListFila> filas = new ArrayList<ArrayListFila>();
+        filas = (ArrayList<ArrayListFila>)nodo.getFilas();
+        //---------------------------
+        
+        ArrayListFila auxListFila = new ArrayListFila();
+        ArrayListColumna auxListColumna = new ArrayListColumna();
+        
+        int cambio=1;
+        int changue=0;
+        while(cambio!=0){
+            cambio=0;
+            
+            nodo.setCambio(0);
+            for(int i=0;i<numFilas;i++){
+                auxListFila = (ArrayListFila)filas.get(i);
+                for(int j=0;j<numColores;j++){
+                    Color auxColor = new Color();
+                    auxColor = auxListFila.getColor(j);
+
+                    if(auxColor.getNumero() > 0){
+                        int contador=0;
+                        for(int c=0;c<numColumnas;c++){
+                            auxListColumna=(ArrayListColumna)columnas.get(c);
+
+                            for(int j1=0;j1<numColores;j1++){
+                                Color auxColor1 = new Color();
+                                auxColor1 = auxListColumna.getColor(j1);
+                                if(auxColor1.getNumero() > 0){
+                                    if(auxColor.getColor().equals(auxColor1.getColor()) && operadores.isPosicionVaciaFila(nodo.getMatriz(), i, c)){
+                                        contador++;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if(auxColor.getNumero() == contador){
+                            changue=1;
+                            cambio=1;
+                            auxColor.setNumero(0);
+                            for(int c=0;c<numColumnas;c++){
+                            auxListColumna=(ArrayListColumna)columnas.get(c);
+
+                                for(int j1=0;j1<numColores;j1++){
+                                    Color auxColor1 = new Color();
+                                    auxColor1 = auxListColumna.getColor(j1);
+                                    if(auxColor1.getNumero() > 0){
+                                        if(auxColor.getColor().equals(auxColor1.getColor()) && operadores.isPosicionVaciaFila(nodo.getMatriz(), i, c)){
+                                         
+                                            auxColor1.setNumero(auxColor1.getNumero()-1);
+
+                                            matriz = operadores.pintarPosicion(matriz, i, c, auxColor.getColor());
+
+                                            nodo.setMatriz(matriz);
+                                        }
+                                    }
+                                }
+                            }
+                            System.out.println("-----");
+                            operadores.imprimirMatriz(nodo.getMatriz());
+                            System.out.println("-----");
+                            
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
+        if(changue==1) nodo.setCambio(1);
+        System.out.println("----------------fin heuristica espaciosJustos-------------- ");
+        return (Nodo)nodo;
+    }
+     
 }
