@@ -60,9 +60,9 @@ public class Heuristica {
                                     ((ArrayListColumna)columnas.get(x)).getColor(j).setNumero((((ArrayListColumna)columnas.get(x)).getColor(j).getNumero())-1);
                                 }
                             }
-                            System.out.println("---");
+                            System.out.println("-----");
                             operadores.imprimirMatriz(matriz);
-                            System.out.println("---");
+                            System.out.println("-----");
                         }
                     }
                 }
@@ -91,9 +91,9 @@ public class Heuristica {
                                     ((ArrayListFila)filas.get(x)).getColor(j).setNumero((((ArrayListFila)filas.get(x)).getColor(j).getNumero())-1);
                                 }
                             }
-                            System.out.println("---");
+                            System.out.println("-----");
                             operadores.imprimirMatriz(matriz);
-                            System.out.println("---");
+                            System.out.println("-----");
                         }
                     }
                 }
@@ -112,7 +112,7 @@ public class Heuristica {
     //dos colores disponibles, dos no seguidos, y el resto seguidos
     
     public Nodo dosNoSeguidos(Nodo nodo) throws IOException{
-        System.out.println("------------------------------");
+        System.out.println("----------------inicio heuristica dosnoseguidos--------------");
         Operadores operadores = new Operadores();
         //variables de matriz
         int numFilas,numColumnas,numColores;
@@ -133,6 +133,9 @@ public class Heuristica {
         filas = (ArrayList<ArrayListFila>)nodo.getFilas();
         //---------------------------
         
+        ArrayListFila auxListFila = new ArrayListFila();
+        ArrayListColumna auxListColumna = new ArrayListColumna();
+        
         int cambio=1;
         
         while(cambio!=0){
@@ -140,22 +143,18 @@ public class Heuristica {
             
             for(int i = 0;i<numFilas;i++){
                 if(operadores.isFilaVacia(nodo.getMatriz(), i) == true){
-                    //filas 
-                    System.out.println("procesando filas");
-                    ArrayListFila auxListFila = new ArrayListFila();
+                    //filas
                     auxListFila = (ArrayListFila)filas.get(i);
 
                     int contadorColores = 0;
                     for(int j=0;j<numColores;j++){
                         Color auxColor = new Color();
                         auxColor = auxListFila.getColor(j);
-                        System.out.println("color "+j+" : "+auxColor.getColor()+" num: "+auxColor.getNumero());
                         if(auxColor.getNumero() > 0){
                             contadorColores++;
                         }
                     }//fin color
 
-                    System.out.println("asfasdfasdfasdfasdf: "+contadorColores);
 
                     if(contadorColores == 2){//esto quiere decir que hay dos colores disponibles para usar en la matriz
                         //ahora hay que ver si uno de los dos es igual a 2 y false
@@ -169,7 +168,7 @@ public class Heuristica {
                                     auxColor2 = auxListFila.getColor(j2);
 
                                     if(auxColor2.isSeguido() == true){
-                                        System.out.println("seee chuchetumare segundo color");
+                                        cambio=1;
                                         //pinta los extremos de la fila
                                         matriz = operadores.pintarPosicion(matriz,(numFilas-1), i, auxColor1.getColor());
                                         matriz = operadores.pintarPosicion(matriz, 0, i, auxColor1.getColor());
@@ -181,13 +180,45 @@ public class Heuristica {
                                         
                                         //descontar colores en las columnas
                                         for(int c=0;c<numColumnas;c++){
+                                            auxListColumna = (ArrayListColumna)columnas.get(c);
+                                            
+                                            if(c == 0){
+                                                for(int c1=0;c1<numColores;c1++){
+                                                    Color auxColorc1 = new Color();
+                                                    auxColorc1 = auxListColumna.getColor(c1);
+                                                    
+                                                    if(auxColorc1.getColor().equals(auxColor1.getColor())){
+                                                        auxColorc1.setNumero(auxColorc1.getNumero()-1);
+                                                    }
+                                                    
+                                                }
+                                            }else if(c == (numColumnas-1)){
+                                                for(int c1=0;c1<numColores;c1++){
+                                                    Color auxColorc1 = new Color();
+                                                    auxColorc1 = auxListColumna.getColor(c1);
+                                                    
+                                                    if(auxColorc1.getColor().equals(auxColor1.getColor())){
+                                                        auxColorc1.setNumero(auxColorc1.getNumero()-1);
+                                                    }
+                                                }
+                                            }else{
+                                                for(int c1=0;c1<numColores;c1++){
+                                                    Color auxColorc1 = new Color();
+                                                    auxColorc1 = auxListColumna.getColor(c1);
+                                                    
+                                                    if(auxColorc1.getColor().equals(auxColor2.getColor())){
+                                                        auxColorc1.setNumero(auxColorc1.getNumero()-1);
+                                                    }
+                                                }
+                                            
+                                            }
                                             
                                         }
                                         
                                         nodo.setMatriz(matriz.clone());
-                                        
-                                        operadores.imprimirNodo(nodo);
-                                        cambio=1;
+                                        System.out.println("-----");
+                                        operadores.imprimirMatriz(nodo.getMatriz());
+                                        System.out.println("-----");
                                     }
                                 }
                             }
@@ -201,20 +232,16 @@ public class Heuristica {
             for(int i = 0;i<numColumnas;i++){
                 if(operadores.isColumnaVacia(nodo.getMatriz(), i) == true){    
                     //columnas
-                    System.out.println("procesando columnas");
-                    ArrayListColumna auxListColumna = new ArrayListColumna();
                     auxListColumna = (ArrayListColumna)columnas.get(i);
 
                     int contadorColores = 0;
                     for(int j=0;j<numColores;j++){
                         Color auxColor = new Color();
                         auxColor = auxListColumna.getColor(j);
-                        System.out.println("color "+j+" : "+auxColor.getColor()+" num: "+auxColor.getNumero());
                         if(auxColor.getNumero() > 0){
                             contadorColores++;
                         }    
                     }//fin color
-                    System.out.println("asfasdfasdfasdfasdf: "+contadorColores);
                     if(contadorColores == 2){//esto quiere decir que hay dos colores disponibles para usar en la matriz
                         //ahora hay que ver si uno de los dos es igual a 2 y false
                         for(int j1=0;j1<numColores;j1++){
@@ -222,12 +249,11 @@ public class Heuristica {
                             auxColor1 = auxListColumna.getColor(j1);
 
                             if(auxColor1.getNumero() == 2 && auxColor1.isSeguido() == false){
-                                System.out.println("seee chuchetumare color 2 no seguid0");
                                 for(int j2=0;j2<numColores;j2++){
                                     Color auxColor2 = new Color();
                                     auxColor2 = auxListColumna.getColor(j2);
                                     if(auxColor2.isSeguido() == true){
-                                        System.out.println("seee chuchetumare segundo color");
+                                        cambio=1;
                                         matriz = operadores.pintarPosicion(matriz,(numColumnas-1), i, auxColor1.getColor());
                                         matriz = operadores.pintarPosicion(matriz, 0, i, auxColor1.getColor());
                                         
@@ -236,10 +262,49 @@ public class Heuristica {
                                         auxColor1.setNumero(0);
                                         auxColor2.setNumero(0);
                                         
-                                        nodo.setMatriz(matriz.clone());
                                         
-                                        operadores.imprimirNodo(nodo);
-                                        cambio=1;
+                                        //descontar colores en las columnas
+                                        for(int f=0;f<numFilas;f++){
+                                            auxListFila = (ArrayListFila)filas.get(f);
+                                            
+                                            if(f == 0){
+                                                for(int f1=0;f1<numColores;f1++){
+                                                    Color auxColorf1 = new Color();
+                                                    auxColorf1 = auxListFila.getColor(f1);
+                                                    
+                                                    if(auxColorf1.getColor().equals(auxColor1.getColor())){
+                                                        auxColorf1.setNumero(auxColorf1.getNumero()-1);
+                                                    }
+                                                    
+                                                }
+                                            }else if(f == (numColumnas-1)){
+                                                for(int f1=0;f1<numColores;f1++){
+                                                    Color auxColorf1 = new Color();
+                                                    auxColorf1 = auxListFila.getColor(f1);
+                                                   
+                                                    if(auxColorf1.getColor().equals(auxColor1.getColor())){
+                                                        auxColorf1.setNumero(auxColorf1.getNumero()-1);
+                                                    }
+                                                    
+                                                }
+                                            }else{
+                                                for(int f1=0;f1<numColores;f1++){
+                                                    Color auxColorf1 = new Color();
+                                                    auxColorf1 = auxListFila.getColor(f1);
+                                                    
+                                                    if(auxColorf1.getColor().equals(auxColor2.getColor())){
+                                                        auxColorf1.setNumero(auxColorf1.getNumero()-1);
+                                                    }
+                                                }
+                                            
+                                            }
+                                            
+                                        }
+                                        
+                                        nodo.setMatriz(matriz.clone());
+                                        System.out.println("-----");
+                                        operadores.imprimirMatriz(nodo.getMatriz());
+                                        System.out.println("-----");
                                     }
                                 }
                             }
@@ -247,12 +312,9 @@ public class Heuristica {
                     }
                 }
             }//fin columnas
-            
-        System.out.println("dsge: "+cambio);
-        System.in.read();
         }//fin while principal
         
-        System.out.println("------------------------------");
+        System.out.println("---------------final heuristica dosnoseguidos---------------");
         return nodo;
     }
 }

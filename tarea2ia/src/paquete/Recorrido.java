@@ -14,12 +14,12 @@ public class Recorrido {
         Operadores operadores = new Operadores();
         Nodo nodoActual = new Nodo();
         nodoActual = (Nodo)raiz;
-        //nodoActual = (Nodo)heuristica.colorIgualVacio(raiz);
               
-        //operadores.imprimirNodo(nodoActual);
         
         nodoActual = (Nodo)heuristica.dosNoSeguidos(nodoActual);
+        operadores.imprimirNodo(nodoActual);
         
+        nodoActual = (Nodo)heuristica.colorIgualVacio(raiz);
         operadores.imprimirNodo(nodoActual);
         
         return nodoActual.getMatriz();    
