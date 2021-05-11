@@ -1,0 +1,1465 @@
+openapi: 3.0.1
+info:
+  title: Order Orchestrator Api
+  description: API Documentation For Order Orchestrator
+  version: 1.0.0
+  contact:
+    email: ext_dvasanthakumar@Falabella.cl
+security:
+  - bearerAuth: []
+tags:
+  - name: ExecuteWorkflow
+    description: WorkflowExecutionController
+  - name: CreateDefinitions
+    description: DefinitionController
+  - name: GscRequestController
+    description: GscRequestController
+paths:
+  /v1/workflow/execute/:
+    post:
+      description: Execute WorkFlow
+      tags:
+        - ExecuteWorkflow
+      summary: Execute Workflow Request
+      operationId: executeWorkflowUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/StartWorkflowRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+        '200':
+          description: OK
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadWorkFlowRequestDataErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+  /v1/definition/tasks/:
+    post:
+      description: create Task Definitions
+      tags:
+        - CreateDefinitions
+      summary: Create Task Definition for TaskDefinitionRequest
+      operationId: createTaskUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/TaskDefinitionRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDefinitionRequestDataErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+  /v1/definition/steps/:
+    post:
+      description: create Step Definitions
+      tags:
+        - CreateDefinitions
+      summary: Create Step Definition for StepDefinitionRequest
+      operationId: createStepUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/StepDefinitionRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDefinitionRequestDataErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+    get:
+      description: find StepDefinition By TriggerType EventType And EntityType
+      tags:
+        - CreateDefinitions
+      summary: findStepDefByTriggerTypeEventTypeAndEntityType.
+      operationId: findStepDefByTriggerTypeEventTypeAndEntityType
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: triggerType
+          in: query
+          description: triggerType
+          required: false
+          schema:
+            type: string
+        - name: eventType
+          in: query
+          description: eventType
+          required: false
+          schema:
+            type: string
+        - name: entityType
+          in: query
+          description: entityType
+          required: false
+          schema:
+            type: string
+
+      responses:
+        default:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/StepDefinitionsResponse'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/StepDefinitionsResponse'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '404':
+          description: Id Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStepDefinitionNotFoundErrorResponse'
+      deprecated: false
+  /v1/definition/workflows/:
+    post:
+      description: create Workflow Definitions
+      tags:
+        - CreateDefinitions
+      summary: Create Step Definition for StepDefinitionRequest
+      operationId: createWorkFlowUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/WorkFlowDefinitionRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkFlowDefinitionRequestDataErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+    get:
+      description: getAllWorkflows
+      tags:
+        - CreateDefinitions
+      summary: getAllWorkflows.
+      operationId: getAllWorkflows
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetWorkFlowDefinitions'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetWorkFlowDefinitions'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '404':
+          description: Id Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDetailedWorkFlowNotFoundErrorResponse'
+      deprecated: false
+  /v1/definition/workflows/{id}:
+    delete:
+      description: Delete Workflow
+      tags:
+        - CreateDefinitions
+      summary: deleteWorkflows by workflowid
+      operationId: removeWorkFlowUsingDELETE
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Id Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkFlowNotFoundErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadDataErrorResponseForDeleteWorkFlow'
+      deprecated: false
+  /v1/definition//workflows/detailed:
+    get:
+      description: getAllDetailedWorkflows
+      tags:
+        - CreateDefinitions
+      summary: getAllDetailedWorkflows.
+      operationId: getAllDetailedWorkflows
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetAllWorkFlowResponse'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetAllWorkFlowResponse'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '404':
+          description: Id Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDetailedWorkFlowNotFoundErrorResponse'
+      deprecated: false
+  /v1/definition/steps/{id}:
+    delete:
+      description: Delete Step
+      tags:
+        - CreateDefinitions
+      summary: delete Step by stepid
+      operationId: removeStepUsingDELETE
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Id Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkFlowNotFoundErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadDataErrorResponseForDeleteWorkFlow'
+      deprecated: false
+  /v1/gsc/sellerOrderLine/status/{sellerOrderNumber}:
+    post:
+      description: sellerOrderLine Status Update
+      tags:
+        - GscRequestController
+      summary: processSellerOrderLineRequest
+      operationId: createSellerOrderLineUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: sellerOrderNumber
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericRequest'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GscErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+  /v1/gsc/shipments/{shipmentId}/labels:
+    post:
+      description: Label generation request
+      tags:
+        - GscRequestController
+      summary: Label generation request
+      operationId: createLabelUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: shipmentId
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericRequest'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                type: object
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GscErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+  /v1/gsc/shipment-estimates:
+    post:
+      description: shipment estimate request
+      tags:
+        - GscRequestController
+      summary: shipment estimate request
+      operationId: createShipmentEstimateUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericRequest'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                type:  object
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GscErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+  /v1/gsc/mkp_packages:
+    post:
+      description: shipment creation request
+      tags:
+        - GscRequestController
+      summary: shipment creation request
+      operationId: createShipmentUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericRequest'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GscErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+  /v1/gsc/seller-orders/orderLines/cancel/{sellerOrderNumber}:
+    post:
+      description: Cancel OrderLines Request
+      tags:
+        - GscRequestController
+      summary: Cancel OrderLines Request
+      operationId: cancelOrderLineUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: sellerOrderNumber
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericRequest'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GscErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+  /v1/gsc/seller-shipments/{sellerShipmentId}/ready-to-ship:
+    post:
+      description: Ready To Ship Request
+      tags:
+        - GscRequestController
+      summary: Ready To Ship Request
+      operationId: readyToShipUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: sellerShipmentId
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericRequest'
+        required: true
+      responses:
+        default:
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericRequest'
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseEntity'
+        '401':
+          description: Un-Authorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnAuthorizedErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+        '400':
+          description: Bad Request Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GscErrorResponse'
+      deprecated: false
+      x-codegen-request-body-name: request
+
+
+components:
+  schemas:
+    ResponseEntity:
+      title: ResponseEntity
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+    UnAuthorizedErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 401
+                description: Error Code
+              message:
+                type: string
+                example: 401-Unauthorized
+                description: Error Message
+    ConflictErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 409
+                description: Error Code
+              message:
+                type: string
+                example: 409-Conflict
+                description: Error Message
+    DefaultErrorResponse:
+      type: object
+      required:
+        - success
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 500-Internal Server Error
+              message:
+                type: string
+                example: 'Something went wrong'
+                description: Error Message
+    BadDataErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 400-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: Seller Order Number cannot be empty
+                description: Error Message
+    StartWorkflowRequest:
+      title: StartWorkflowRequest
+      required:
+        - workFlowReference
+      type: object
+      properties:
+        workFlowReference:
+          type: string
+        version:
+          type: integer
+          format: int32
+        schemaVersion:
+          type: integer
+        parentEntityId:
+          type: string
+          format: UUID
+        entityId:
+          type: string
+          format: UUID
+        workflowDefinitionId:
+          type: string
+          format: UUID
+        startedBy:
+          type: string
+        input:
+          type: object
+          properties: {}
+        stepReference:
+          type: string
+        stepDefinitionId:
+          type: string
+          format: UUID
+    BadWorkFlowRequestDataErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 400-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: Workflow name cannot be null or empty
+                description: Error Message
+    TaskDefinitionRequest:
+      title: TaskDefinitionRequest
+      required:
+        - taskType
+      type: object
+      properties:
+        updatedBy:
+          type: string
+        name:
+          type: string
+        referenceName:
+          type: string
+        description:
+          type: string
+        retryCount:
+          type: integer
+          format: int32
+        retryLogic:
+          type: string
+          enum:
+            - FIXED
+            - EXPONENTIAL_BACKOFF
+        retryDelaySeconds:
+          type: integer
+          format: int64
+        timeoutPolicy:
+          type: string
+          enum:
+            - RETRY
+            - TIME_OUT_WF
+            - ALERT_ONLY
+        inputParams:
+          $ref: '#/components/schemas/Parameters'
+        outputParams:
+          type: object
+          properties: {}
+        defaultTemplate:
+          type: object
+          properties: {}
+        taskType:
+          type: string
+          enum:
+            - DEFAULT
+            - CODED
+            - EVENT
+            - HTTP
+            - DECISION
+            - DO_WHILE
+        template:
+          $ref: '#/components/schemas/Template'
+    Parameters:
+      title: Parameters
+      type: object
+      properties:
+        DATA:
+          type: string
+        ATTRIBUTES:
+          type: string
+    Template:
+      title: Template
+      type: object
+      properties:
+        id:
+          type: string
+    TaskDefinitionRequestDataErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 400-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: taskType cannot be null or empty
+                description: Error Message
+    StepDefinitionRequest:
+      title: StepDefinitionRequest
+      required:
+        - onEntryTasks
+        - trigger
+      type: object
+      properties:
+        updatedBy:
+          type: string
+        name:
+          type: string
+        referenceName:
+          type: string
+        description:
+          type: string
+        retryCount:
+          type: integer
+          format: int32
+        retryLogic:
+          type: string
+          enum:
+            - FIXED
+            - EXPONENTIAL_BACKOFF
+        retryDelaySeconds:
+          type: integer
+          format: int64
+        timeoutPolicy:
+          type: string
+          enum:
+            - RETRY
+            - TIME_OUT_WF
+            - ALERT_ONLY
+        inputParams:
+          $ref: '#/components/schemas/Parameters'
+        outputParams:
+          type: object
+          properties: {}
+        defaultTemplate:
+          type: object
+          properties: {}
+        onEntryTasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskDefinitionDependency'
+        onEntryTasksIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        trigger:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+    TaskDefinitionDependency:
+      title: TaskDefinitionDependency
+      required:
+        - taskDefinitionId
+      type: object
+      properties:
+        taskDefinitionId:
+          type: string
+          format: UUID
+        dependsOnTaskDefinitionId:
+          type: string
+          format: UUID
+    Trigger:
+      title: TaskDefinitionDependency
+      required:
+        - entityType
+        - eventType
+      type: object
+      properties:
+        entityType:
+          type: string
+        eventType:
+          type: string
+        type:
+          type: string
+          enum:
+            - EVENT
+            - HTTP
+    StepDefinitionRequestDataErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 400-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: onEntryTasks and trigger cannot be null or empty
+                description: Error Message
+    WorkFlowDefinitionRequest:
+      title: WorkFlowDefinitionRequest
+      required:
+        - workflowStepsIds
+      type: object
+      properties:
+        createTime:
+          type: string
+          format: date-time
+        updateTime:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        name:
+          type: string
+        referenceName:
+          type: string
+        description:
+          type: string
+        inputParams:
+          $ref: '#/components/schemas/Parameters'
+        outputParams:
+          type: object
+          properties: {}
+        defaultTemplate:
+          type: object
+          properties: {}
+        workflowSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reference'
+        workflowStepsIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        version:
+          type: integer
+        schemaVersion:
+          type: integer
+        trigger:
+          type: string
+    WorkFlowDefinitionRequestDataErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 400-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: workflowStepsIds cannot be null or empty
+                description: Error Message
+    Reference:
+      title: Reference
+      type: object
+      properties:
+        referenceName:
+          type: string
+        dependsOn:
+          type: string
+    StepDefinitionsResponse:
+      title: StepDefinitionsResponse
+      type: object
+      properties:
+        stepDefinitionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        workflowDefinitionId:
+          type: string
+          format: UUID
+    GetStepDefinitionNotFoundErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 404-Not Found
+                description: Error Code
+              message:
+                type: string
+                example: Step Definition Not Found
+                description: Error Message
+    WorkFlowNotFoundErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 404-Not Found
+                description: Error Code
+              message:
+                type: string
+                example: Id Not Found
+                description: Error Message
+    BadDataErrorResponseForDeleteWorkFlow:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 404-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: [Id is mandatory]
+                description: Error Message
+    GetAllWorkFlowResponse:
+      title: GetAllWorkFlowResponse
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetailedStepDefinition'
+    GetAllWorkFlow:
+      title: GetAllWorkFlows
+      type: object
+      properties:
+        workflowDefinitionId:
+          type: string
+          format: UUID
+        name:
+          type: string
+        referenceName:
+          type: string
+        description:
+          type: string
+        inputParams:
+          $ref: '#/components/schemas/Parameters'
+        outputParams:
+          type: object
+          properties: {}
+        version:
+          type: integer
+          format: int32
+        schemaVersion:
+          type: integer
+          format: int32
+        trigger:
+          type: string
+        stepDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetailedStepDefinition'
+    DetailedStepDefinition:
+      title: TaskDefinitionRequest
+      type: object
+      properties:
+        stepDefinitionId:
+          type: string
+          format: UUID
+        name:
+          type: string
+        referenceName:
+          type: string
+        description:
+          type: string
+        retryCount:
+          type: integer
+          format: int32
+        retryLogic:
+          type: string
+          enum:
+            - FIXED
+            - EXPONENTIAL_BACKOFF
+        retryDelaySeconds:
+          type: integer
+          format: int64
+        timeoutPolicy:
+          type: string
+          enum:
+            - RETRY
+            - TIME_OUT_WF
+            - ALERT_ONLY
+        inputParams:
+          $ref: '#/components/schemas/Parameters'
+        outputParams:
+          type: object
+          properties: {}
+        defaultTemplate:
+          type: object
+          properties: {}
+        trigger:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+        taskDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskDefinitionRequest'
+    GetDetailedWorkFlowNotFoundErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 400-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: workflows Not Found
+                description: Error Message
+    GetWorkFlowDefinitions:
+      title: GetWorkFlowDefinitions
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkFlowDefinitionRequest'
+    GenericRequest:
+      title: TaskDefinitionRequest
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: object
+          properties: {}
+
+    GscErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 400-Bad Request
+                description: Error Code
+              message:
+                type: string
+                example: Gsc request cannot be null or empty
+                description: Error Message
+
+
+
+
+
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://api-governance-corp.falabella.com/virts/Digital-Retail/orderOrchestrator-api/0.0.1-SNAPSHOT
